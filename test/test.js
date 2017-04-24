@@ -8,7 +8,7 @@ const uuid = require('uuid')
 
 const HTMLEPUB = require('../lib')
 
-const htmlFiles = glob.sync(path.join(__dirname, '..', 'data', '*.html')).map(file => ({
+const htmlFiles = glob.sync(path.join(__dirname, 'data', '*.html')).map(file => ({
   basename: path.basename(file),
   content: fs.readFileSync(file)
 }))
