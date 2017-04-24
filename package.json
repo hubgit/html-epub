@@ -1,4 +1,5 @@
 {
+  "main": "lib/index.js",
   "scripts": {
     "test": "jest --runInBand test"
   },
