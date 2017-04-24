@@ -30,7 +30,7 @@ test('generates metadata', () => {
 test('parses html', (done) => {
   const epub = new HTMLEPUB(book)
 
-  epub.parseHTML(htmlFile.content).then($ => {
+  epub.parse(htmlFile.content).then($ => {
     try {
       expect($('h2').text()).toBe('Test Section')
       done()
@@ -43,7 +43,7 @@ test('parses html', (done) => {
 test('produces xhtml', (done) => {
   const epub = new HTMLEPUB(book)
 
-  epub.parseHTML(htmlFile.content).then($ => {
+  epub.parse(htmlFile.content).then($ => {
     try {
       expect($('html').attr('xmlns')).toBe('http://www.w3.org/1999/xhtml')
       done()
@@ -56,7 +56,7 @@ test('produces xhtml', (done) => {
 test('extracts files', (done) => {
   const epub = new HTMLEPUB(book)
 
-  epub.loadHTMLFiles(htmlFiles).then(() => {
+  epub.load(htmlFiles).then(() => {
     try {
       const image = epub.images.find(item => item.source === '/images/1.png')
 
@@ -71,16 +71,16 @@ test('extracts files', (done) => {
 test('creates a zip file', (done) => {
   const epub = new HTMLEPUB(book)
 
-  epub.loadHTMLFiles(htmlFiles).then(() => {
+  epub.load(htmlFiles).then(() => {
     const outputFile = os.tmpdir() + '/' + uuid() + '.epub'
     // const outputFile = os.tmpdir() + '/' + 'test.epub'
     console.log('Writing to', outputFile)
 
     const outputStream = fs.createWriteStream(outputFile)
 
-    epub.stream(outputStream).then((archive) => {
+    epub.stream(outputStream).then(archive => {
       outputStream.on('close', function () {
-        console.log('Wrote', outputStream.bytesWritten, 'bytes')
+        console.log('Wrote', archive.pointer(), 'bytes')
 
         // exec('epubcheck ' + outputFile).then(result => {
         //   console.log(result.stdout)
@@ -97,7 +97,7 @@ test('creates a zip file', (done) => {
 test('generates properties', (done) => {
   const epub = new HTMLEPUB(book)
 
-  epub.parseHTML(htmlFile.content).then($ => {
+  epub.parse(htmlFile.content).then($ => {
     try {
       const properties = epub.properties($)
       expect(properties).toEqual(['scripted', 'mathml', 'svg'])
