@@ -93,3 +93,17 @@ test('creates a zip file', (done) => {
     }).catch(done.fail)
   }).catch(done.fail)
 })
+
+test('generates properties', (done) => {
+  const epub = new HTMLEPUB(book)
+
+  epub.parseHTML(htmlFile.content).then($ => {
+    try {
+      const properties = epub.properties($)
+      expect(properties).toEqual(['scripted', 'mathml', 'svg'])
+      done()
+    } catch (e) {
+      done.fail(e)
+    }
+  })
+})
