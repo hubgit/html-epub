@@ -1,10 +1,11 @@
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000
+// jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000
+
 const fs = require('fs')
 const path = require('path')
 const glob = require('glob')
 const os = require('os')
 const uuid = require('uuid')
-const exec = require('child-process-promise').exec
+// const exec = require('child-process-promise').exec
 
 const HTMLEPUB = require('../lib')
 
