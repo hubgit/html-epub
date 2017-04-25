@@ -13,6 +13,8 @@ const html = glob.sync(path.join(__dirname, 'data', '*.html')).map(file => ({
   content: fs.readFileSync(file)
 }))
 
+const resourceRoot = path.join(__dirname, 'data')
+
 const book = {
   title: 'Test Book',
   identifier: 'com.example/1',
@@ -20,13 +22,13 @@ const book = {
 }
 
 test('generates metadata', () => {
-  const epub = new HTMLEPUB(book)
+  const epub = new HTMLEPUB(book, {resourceRoot})
 
   expect(epub.metadata['dc:title']['#text']).toBe(book.title)
 })
 
 test('parses html', (done) => {
-  const epub = new HTMLEPUB(book)
+  const epub = new HTMLEPUB(book, {resourceRoot})
 
   epub.parse(html[0].content).then($ => {
     try {
@@ -39,7 +41,7 @@ test('parses html', (done) => {
 })
 
 test('produces xhtml', (done) => {
-  const epub = new HTMLEPUB(book)
+  const epub = new HTMLEPUB(book, {resourceRoot})
 
   epub.parse(html[0].content).then($ => {
     try {
@@ -52,8 +54,6 @@ test('produces xhtml', (done) => {
 })
 
 test('extracts files', (done) => {
-  const resourceRoot = path.join(__dirname, 'data')
-
   const epub = new HTMLEPUB(book, {resourceRoot})
 
   epub.load(html).then(() => {
@@ -69,7 +69,7 @@ test('extracts files', (done) => {
 })
 
 test('creates a zip file', (done) => {
-  const epub = new HTMLEPUB(book)
+  const epub = new HTMLEPUB(book, {resourceRoot})
 
   epub.load(html).then(() => {
     const outputFile = os.tmpdir() + '/' + uuid() + '.epub'
@@ -96,7 +96,7 @@ test('creates a zip file', (done) => {
 })
 
 test('generates properties', (done) => {
-  const epub = new HTMLEPUB(book)
+  const epub = new HTMLEPUB(book, {resourceRoot})
 
   epub.parse(html[0].content).then($ => {
     try {
