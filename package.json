@@ -33,5 +33,6 @@
       "jest": true,
       "jasmine": true
     }
-  }
+  },
+  "version": "0.0.1"
 }
