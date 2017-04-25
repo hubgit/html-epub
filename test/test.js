@@ -10,11 +10,8 @@ const uuid = require('uuid')
 const HTMLEPUB = require('../lib')
 
 const htmlFiles = glob.sync(path.join(__dirname, 'data', '*.html')).map(file => ({
-  basename: path.basename(file),
   content: fs.readFileSync(file)
 }))
-
-const htmlFile = htmlFiles.find(item => item.basename === '1.html')
 
 const book = {
   title: 'Test Book',
@@ -31,7 +28,7 @@ test('generates metadata', () => {
 test('parses html', (done) => {
   const epub = new HTMLEPUB(book)
 
-  epub.parse(htmlFile.content).then($ => {
+  epub.parse(htmlFiles[0].content).then($ => {
     try {
       expect($('h2').text()).toBe('Test Section')
       done()
@@ -44,7 +41,7 @@ test('parses html', (done) => {
 test('produces xhtml', (done) => {
   const epub = new HTMLEPUB(book)
 
-  epub.parse(htmlFile.content).then($ => {
+  epub.parse(htmlFiles[0].content).then($ => {
     try {
       expect($('html').attr('xmlns')).toBe('http://www.w3.org/1999/xhtml')
       done()
@@ -101,7 +98,7 @@ test('creates a zip file', (done) => {
 test('generates properties', (done) => {
   const epub = new HTMLEPUB(book)
 
-  epub.parse(htmlFile.content).then($ => {
+  epub.parse(htmlFiles[0].content).then($ => {
     try {
       const properties = epub.properties($)
       expect(properties).toEqual(['scripted', 'mathml', 'svg'])
