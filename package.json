@@ -1,7 +1,7 @@
 {
   "name": "html-epub",
   "description": "Generate EPUB from HTML files",
-  "main": "lib/index.js",
+  "homepage": "https://gitlab.coko.foundation/pubsweet/html-epub",
   "repository": {
     "type": "git",
     "url": "git+https://gitlab.coko.foundation/pubsweet/html-epub.git"
@@ -9,6 +9,7 @@
   "scripts": {
     "test": "jest --runInBand test"
   },
+  "main": "lib/index.js",
   "files": [
     "lib"
   ],
