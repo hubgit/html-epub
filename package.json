@@ -1,4 +1,6 @@
 {
+  "name": "html-epub",
+  "description": "Generate EPUB from HTML files",
   "main": "lib/index.js",
   "scripts": {
     "test": "jest --runInBand test"
