@@ -4,7 +4,7 @@ const path = require('path')
 const glob = require('glob')
 const os = require('os')
 const uuid = require('uuid')
-// const exec = require('child-process-promise').exec
+const exec = require('child-process-promise').exec
 
 const HTMLEPUB = require('../lib')
 
@@ -54,11 +54,13 @@ test('produces xhtml', (done) => {
 })
 
 test('extracts files', (done) => {
-  const epub = new HTMLEPUB(book)
+  const resourceRoot = 'https://www.example.com/resources/'
+
+  const epub = new HTMLEPUB(book, {resourceRoot})
 
   epub.load(htmlFiles).then(() => {
     try {
-      const image = epub.images.find(item => item.source === '/images/1.png')
+      const image = epub.images.find(item => item.source === resourceRoot + 'images/1.png')
 
       expect(image).not.toBeNull()
       done()
@@ -82,6 +84,7 @@ test('creates a zip file', (done) => {
       outputStream.on('close', function () {
         console.log('Wrote', archive.pointer(), 'bytes')
 
+        // TODO: run epubcheck if installed
         // exec('epubcheck ' + outputFile).then(result => {
         //   console.log(result.stdout)
         //   console.err(result.stderr)
