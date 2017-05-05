@@ -50,7 +50,7 @@ test('produces xhtml', (done) => {
     } catch (e) {
       done.fail(e)
     }
-  })
+  }).catch(done.fail)
 })
 
 test('extracts files', (done) => {
@@ -65,7 +65,7 @@ test('extracts files', (done) => {
     } catch (e) {
       done.fail(e)
     }
-  })
+  }).catch(done.fail)
 })
 
 test('creates a zip file', (done) => {
@@ -106,5 +106,5 @@ test('generates properties', (done) => {
     } catch (e) {
       done.fail(e)
     }
-  })
+  }).catch(done.fail)
 })
