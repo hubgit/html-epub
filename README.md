@@ -1,5 +1,11 @@
 # html-epub
 
+This module is responsible for converting an array of HTML chapters (plus a book metadata object) into an EPUB archive.
+
+The output is a stream which can either be piped to an HTTP response or output to a file.
+
+See [pubsweet-component-epub](https://gitlab.coko.foundation/pubsweet/pubsweet-components/tree/master/packages/Epub) for an example implementation.
+
 ## Install
 
 ```
