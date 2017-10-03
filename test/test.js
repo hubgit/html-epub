@@ -53,7 +53,7 @@ test('produces xhtml', (done) => {
   }).catch(done.fail)
 })
 
-test('extracts files', (done) => {
+test('extracts images', (done) => {
   const epub = new HTMLEPUB(book, {resourceRoot})
 
   epub.load(html).then(() => {
@@ -61,6 +61,21 @@ test('extracts files', (done) => {
       const image = epub.images.find(item => item.source === resourceRoot + 'images/1.png')
 
       expect(image).not.toBeNull()
+      done()
+    } catch (e) {
+      done.fail(e)
+    }
+  }).catch(done.fail)
+})
+
+test('extracts stylesheets', (done) => {
+  const epub = new HTMLEPUB(book, { resourceRoot })
+
+  epub.load(html).then(() => {
+    try {
+      const style = epub.styles.find(item => item.source === resourceRoot + 'styles/epub.css')
+
+      expect(style).not.toBeNull()
       done()
     } catch (e) {
       done.fail(e)
