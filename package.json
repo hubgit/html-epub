@@ -19,7 +19,7 @@
     "cheerio": "^0.22.0",
     "libtidy": "^0.3.2",
     "mime-types": "^2.1.15",
-    "xmlbuilder": "^8.2.2"
+    "xmlbuilder": "^9.0.4"
   },
   "devDependencies": {
     "child-process-promise": "^2.2.1",
