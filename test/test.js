@@ -73,10 +73,10 @@ test('chapter order is preserved', (done) => {
 
   epub.load(html).then(() => {
     try {
-      expect(epub.xhtml[0].id).toEqual('page-1')
+      expect(epub.xhtml[0].id).toEqual('chapter-1')
       expect(epub.xhtml[0].$('h1').text()).toEqual('Chapter 1')
 
-      expect(epub.xhtml[1].id).toEqual('page-2')
+      expect(epub.xhtml[1].id).toEqual('chapter-2')
       expect(epub.xhtml[1].$('h1').text()).toEqual('Chapter 2')
       done()
     } catch (e) {
