@@ -21,7 +21,7 @@ yarn add html-epub
 ## Example usage in Express
 
 ```js
-app.use('/books/:book/epub', (req, res, next) => {
+app.use('/books/:book/epub', async (req, res, next) => {
     // book must have `identifier`, `title` and `updated` properties
     const book = BookService.get(req.params.book)
 
@@ -36,7 +36,10 @@ app.use('/books/:book/epub', (req, res, next) => {
 
     const epub = new HTMLEPUB(book, {resourceRoot})
 
+    // load the book parts
+    await epub.load(parts)
+    
     // pipe the zip file to the response stream
-    epub.load(parts).then(() => epub.stream(res))
+    epub.stream(res)
 })
 ```
