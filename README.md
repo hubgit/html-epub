@@ -9,7 +9,7 @@ See [pubsweet-component-epub](https://gitlab.coko.foundation/pubsweet/pubsweet-c
 ## Install
 
 ```
-npm install html-epub
+npm install html-epub --save
 ```
 
 or
